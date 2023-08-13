@@ -16,7 +16,13 @@ void mat4_identity(mat4* mat) {
 	mat->m[15] = 1.0f;
 }
 
+void mat4_translation(mat4* mat, vec3 a) {
+	
+}
 
+// void mat4_mult(mat4* res, mat4* a, mat4* b);
+
+///////
 
 void vec2_print(const vec2 a) {
 	printf("%f %f\n", a.x, a.y);
