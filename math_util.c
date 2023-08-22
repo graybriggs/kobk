@@ -41,92 +41,54 @@ void mat4_scale(mat4* mat, float x, float y, float z) {
 
 void mat4_rotate(mat4* mat, float angle, vec3 u) {
 
-		float c = cos(angle);
-		float s = sin(angle);
-		float t = 1.0f - c;
+	float c = cos(angle);
+	float s = sin(angle);
+	float t = 1.0f - c;
 
-		float x = u.x;
-		float y = u.y;
-		float z = u.z;
+	float x = u.x;
+	float y = u.y;
+	float z = u.z;
 
-		// Normalize the axis vector
-		float length = sqrt(x * x + y * y + z * z);
-		if (length > 0.0f) {
-			x /= length;
-			y /= length;
-			z /= length;
-		}
+	// Normalize the axis vector
+	float length = sqrt(x * x + y * y + z * z);
+	if (length > 0.0f) {
+		x /= length;
+		y /= length;
+		z /= length;
+	}
 
-		float tx = t * x;
-		float ty = t * y;
-		float tz = t * z;
+	float tx = t * x;
+	float ty = t * y;
+	float tz = t * z;
 
-		float sx = s * x;
-		float sy = s * y;
-		float sz = s * z;
+	float sx = s * x;
+	float sy = s * y;
+	float sz = s * z;
 
-		// Rotation matrix
-		//mat4 rotation_matrix;
-		mat4 rotation_matrix = MAT4_INIT(
-			tx * x + c, tx * y - sz, tx * z + sy, 0.0f,
-			tx * y + sz, ty * y + c, ty * z - sx, 0.0f,
-			tx * z - sy, ty * z + sx, tz * z + c, 0.0f,
-			0.0f, 0.0f, 0.0f, 1.0f
-		);
+	// Rotation matrix
+	//mat4 rotation_matrix;
+	mat4 rotation_matrix = MAT4_INIT(
+		tx * x + c, tx * y - sz, tx * z + sy, 0.0f,
+		tx * y + sz, ty * y + c, ty * z - sx, 0.0f,
+		tx * z - sy, ty * z + sx, tz * z + c, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	);
 
-		// Apply rotation to the input matrix
-		mat4 result_matrix;
-		mat4_set_identity(&result_matrix);
+	// Apply rotation to the input matrix
+	mat4 result_matrix;
+	mat4_set_identity(&result_matrix);
 		
-		for (int i = 0; i < 16; ++i) {
-			result_matrix.m[i] = 0.0f;
-			for (int j = 0; j < 4; ++j) {
-				result_matrix.m[i] += rotation_matrix.m[i % 4 + j * 4] * mat->m[j * 4 + i / 4];
-			}
+	for (int i = 0; i < 16; ++i) {
+		result_matrix.m[i] = 0.0f;
+		for (int j = 0; j < 4; ++j) {
+			result_matrix.m[i] += rotation_matrix.m[i % 4 + j * 4] * mat->m[j * 4 + i / 4];
 		}
+	}
 
-		// Copy the result back to the input matrix
-		for (int i = 0; i < 16; ++i) {
-			mat->m[i] = result_matrix.m[i];
-		}
-
-	/*
-	if (angle == 0)
-		return;
-
-	mat4 rotate_x;
-	mat4 rotate_y;
-	mat4 rotate_z;
-	mat4_set_identity(&rotate_x);
-	mat4_set_identity(&rotate_y);
-	mat4_set_identity(&rotate_z);
-	
-
-	rotate_x[1][1] = cos(angle_x);
-	rotate_x[1][2] = sin(angle_x);
-	rotate_x[2][1] = -sin(angle_x);
-	rotate_x[2][2] = cos(angle_x);
-
-	Mat_Identity_4x4(rotate_y);
-
-	rotate_y[0][0] = cos(angle_y);
-	rotate_y[0][2] = -sin(angle_y);
-	rotate_y[2][0] = sin(angle_y);
-	rotate_y[2][2] = cos(angle_y);
-
-	Mat_Identity_4x4(rotate_z);
-
-	rotate_z[0][0] = cos(angle_z);
-	rotate_z[0][1] = sin(angle_z);
-	rotate_z[1][0] = -sin(angle_z);
-	rotate_z[1][1] = cos(angle_z);
-
-	mat4 temp;
-	mat4_set_identity(&temp);
-
-	mat4_mul(&temp, &rotate_x, &rotate_y);
-	mat4_mul(&mat, &rotate_z, &temp);
-	*/
+	// Copy the result back to the input matrix
+	for (int i = 0; i < 16; ++i) {
+		mat->m[i] = result_matrix.m[i];
+	}
 }
 
 void mat4_mul(mat4* res, mat4* a, mat4* b) {
