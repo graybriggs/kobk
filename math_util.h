@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 #define PI 3.14159265
-#define DEG2RAD(A) (A) *  (PI / 180)
+#define DEG2RAD(A) (A) * (PI / 180)
 
 typedef struct {
 	float x;
@@ -42,13 +42,9 @@ typedef struct {
 		m12, m13, m14, m15  \
 	}}
 
-
-static inline float vec2_length(vec2 a) {
-	return (float)sqrt(a.x * a.x + a.y * a.y);
-}
-
+// |v|
 static inline float vec2_mag(vec2 a) {
-	return 0.0f;
+	return (float)sqrt(a.x * a.x + a.y * a.y);
 }
 
 
@@ -93,9 +89,11 @@ static inline vec2 vec_mulf(vec2 a, float f) {
 
 // vec3
 
-static inline float vec3_length(vec3 a) {
+// |u|
+static inline float vec3_mag(vec3 a) {
 	return (float)sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
 }
+
 
 static inline vec3 vec3_invert(vec3 a) {
 	return VEC3_INIT(
@@ -140,8 +138,11 @@ static inline vec3 vec3_mulf(vec3 a, float f) {
 	);
 }
 
-
 /////
+
+static inline float vec3_dot(vec3 a, vec3 b) {
+	return a.x * b.x + a.y * b.y + a.z * b.z;
+}
 
 static inline vec3 vec3_cross(vec3 a, vec3 b) {
 	return VEC3_INIT(
@@ -151,10 +152,21 @@ static inline vec3 vec3_cross(vec3 a, vec3 b) {
 	);
 }
 
-static inline float vec3_dot(vec3 a, vec3 b) {
-	return a.x * b.x + a.y * b.y + a.z * b.z;
+
+static inline vec2 vec2_from_2d_points(vec3 init, vec3 term) {
+	return VEC2_INIT(
+		term.x - init.x,
+		term.y - init.y
+	);
 }
 
+static inline vec3 vec3_from_3d_points(vec3 init, vec3 term) {
+	return VEC3_INIT(
+		term.x - init.x,
+		term.y - init.y,
+		term.z - init.z
+	);
+}
 
 
 /////////////////
