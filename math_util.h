@@ -66,13 +66,33 @@ vec3 vec3_add(vec3 a, vec3 b);
 vec3 vec3_sub(vec3 a, vec3 b);
 vec3 vec3_scalar_mul(vec3 a, float f);
 
+vec3 vec3_scalar_mul(vec3 a, float f);
 
-vec3 vec3_mulf(vec3 a, float f);
+float vec_dot(vec2 a, vec2 b) {
+	
+	float component_product = a.x * b.x + a.y * b.y;
+	
+	float mag_a = vec2_mag(a);
+	float mag_b = vec2_mag(b);
+
+	if (mag_a == 0.0f || mag_b == 0.0f)
+		return 0.0f;
+
+	return acos(component_product / (mag_a * mag_b));
+}
+
+vec2 vec2_cross(vec2 a, vec2 b) {
+
+}
+
+vec3 
+
 
 /////
 
-float vec3_dot(vec3 a, vec3 b);
-vec3 vec3_cross(vec3 a, vec3 b);
+float dot(vec3 a, vec3 b);
+vec3 cross(vec3 a, vec3 b);
+
 vec2 vec2_from_2d_points(vec3 init, vec3 term);
 vec3 vec3_from_3d_points(vec3 init, vec3 term);
 
