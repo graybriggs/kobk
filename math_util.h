@@ -85,7 +85,6 @@ vec2 vec2_cross(vec2 a, vec2 b) {
 
 }
 
-vec3 
 
 
 /////
