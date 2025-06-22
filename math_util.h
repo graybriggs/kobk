@@ -54,8 +54,7 @@ vec2 vec2_normalize(vec2 a);
 vec2 vec2_invert(vec2 a);
 vec2 vec2_add(vec2 a, vec2 b);
 vec2 vec2_sub(vec2 a, vec2 b);
-vec2 vec2_mul(vec2 a, vec2 b);
-vec2 vec2_mulf(vec2 a, float f);
+vec2 vec2_scalar_mul(vec2 a, float f);
 
 // vec3
 
@@ -65,9 +64,7 @@ vec3 vec3_normalize(vec3 );
 vec3 vec3_invert(vec3 a);
 vec3 vec3_add(vec3 a, vec3 b);
 vec3 vec3_sub(vec3 a, vec3 b);
-vec3 vec3_mul(vec3 a, vec3 b);
-
-//static inline vec3 vec3_div(vec3 a, vec3 b); // ??
+vec3 vec3_scalar_mul(vec3 a, float f);
 
 
 vec3 vec3_mulf(vec3 a, float f);

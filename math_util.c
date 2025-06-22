@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
+///// vec2
 
 float vec2_mag(vec2 a) {
 	return (float)sqrt(a.x * a.x + a.y * a.y);
@@ -17,15 +18,55 @@ vec3 vec2_normalize(vec2 a) {
 	return VEC2_INIT(a.x / mag, a.y / mag);
 }
 
+vec2 vec2_invert(vec2 a) {
+	return VEC2_INIT(-a.x, -a.y);
+}
+
+vec2 vec2_add(vec2 a, vec2 b) {
+	return VEC2_INIT(a.x + b.x, a.y + b.y);
+}
+
+vec2 vec2_sub(vec2 a, vec2 b) {
+	return VEC2_INIT(a.x - b.x, a.y - b.y);
+}
+
+
+vec2 vec2_scalar_mul(vec2 a, float f) {
+	return VEC2_INIT(f * a.x, f * a.y);
+}
+
+///// vec3
+
+
 float vec3_mag(vec3 a) {
 	return (float)sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
 }
+
 
 vec3 vec3_normalize(vec3 a) {
 	float mag = vec3_mag(a);
 	return VEC3_INIT(a.x / mag, a.y / mag, a.z / mag);
 }
 
+
+vec3 vec3_invert(vec2 a) {
+	return VEC3_INIT(-a.x, -a.y, -a.z);
+}
+
+
+vec3 vec3_add(vec2 a, vec2 b) {
+	return VEC3_INIT(a.x + b.x, a.y + b.y, a.z + b.z);
+}
+
+
+vec3 vec3_sub(vec2 a, vec2 b) {
+	return VEC3_INIT(a.x - b.x, a.y - b.y, a.z - b.z);
+}
+
+
+vec3 vec3_scalar_mul(vec3 a, float f) {
+	return VEC3_INIT(f * a.x, f * a.y, f * a.z);
+}
 
 
 vec3 vec3_transform(vec3 a, mat4* mat) {
@@ -70,6 +111,7 @@ void mat4_rotate(mat4* mat, float angle, vec3 u) {
 	float z = u.z;
 
 	// Normalize the axis vector
+	// (magnitude?)
 	float length = sqrt(x * x + y * y + z * z);
 	if (length > 0.0f) {
 		x /= length;
