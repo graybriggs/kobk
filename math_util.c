@@ -8,10 +8,24 @@
 #include <stdint.h>
 
 
-void mat4_set_identity(mat4* mat) {
-	memset(mat->m, 0, sizeof(mat->m));
-	mat->m[0] = mat->m[5] = mat->m[10] = mat->m[15] = 1.0f;
+float vec2_mag(vec2 a) {
+	return (float)sqrt(a.x * a.x + a.y * a.y);
 }
+
+vec3 vec2_normalize(vec2 a) {
+	float mag = vec2_mag(a);
+	return VEC2_INIT(a.x / mag, a.y / mag);
+}
+
+float vec3_mag(vec3 a) {
+	return (float)sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
+}
+
+vec3 vec3_normalize(vec3 a) {
+	float mag = vec3_mag(a);
+	return VEC3_INIT(a.x / mag, a.y / mag, a.z / mag);
+}
+
 
 
 vec3 vec3_transform(vec3 a, mat4* mat) {
@@ -24,6 +38,12 @@ vec3 vec3_transform(vec3 a, mat4* mat) {
 		(mat->m[1] * a.x + mat->m[5] * a.y + mat->m[9] * a.z + mat->m[13]) / w,
 		(mat->m[2] * a.x + mat->m[6] * a.y + mat->m[10] * a.z + mat->m[14]) / w
 	);
+}
+
+
+void mat4_set_identity(mat4* mat) {
+	memset(mat->m, 0, sizeof(mat->m));
+	mat->m[0] = mat->m[5] = mat->m[10] = mat->m[15] = 1.0f;
 }
 
 
@@ -132,7 +152,7 @@ void mat4_ortho(mat4* mat) {
 
 }
 
-///////
+/////// Print dbg
 
 void vec2_print(const vec2 a) {
 	printf("%f %f\n", a.x, a.y);

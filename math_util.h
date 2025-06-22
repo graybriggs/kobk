@@ -49,6 +49,8 @@ float vec2_mag(vec2 a);
 
 // vec2
 
+float vec2_mag(vec2 a);
+vec2 vec2_normalize(vec2 a);
 vec2 vec2_invert(vec2 a);
 vec2 vec2_add(vec2 a, vec2 b);
 vec2 vec2_sub(vec2 a, vec2 b);
@@ -59,6 +61,7 @@ vec2 vec2_mulf(vec2 a, float f);
 
 // |u|
 float vec3_mag(vec3 a);
+vec3 vec3_normalize(vec3 );
 vec3 vec3_invert(vec3 a);
 vec3 vec3_add(vec3 a, vec3 b);
 vec3 vec3_sub(vec3 a, vec3 b);
