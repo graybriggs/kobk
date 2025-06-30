@@ -88,7 +88,7 @@ void mat4_translate(mat4* mat, vec3 trans);
 void mat4_scale(mat4* mat, float x, float y, float z);
 void mat4_rotate(mat4* mat, float angle, vec3 u);
 void mat4_mul(mat4* res, mat4* a, mat4* b);
-void mat4_inverse(mat4* res, mat4 m);
+void mat4_inverse(mat4* res, mat4* m);
 
 void look_at(vec3 position, vec3 target, vec3 up);
 
